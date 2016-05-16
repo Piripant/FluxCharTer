@@ -13,7 +13,6 @@
   };
 
   workerMessage = function(event) {
-    console.log(event.data);
     switch (event.data[0]) {
       case 'interface':
         return window.interpreteInterface(event.data[1], event.data[2]);
