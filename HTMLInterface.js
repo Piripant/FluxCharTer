@@ -112,7 +112,7 @@
   };
 
   this.DeleteSelBox = function() {
-    var i, j, prevBox, ref;
+    var i, j, k, l, prevBox, ref, ref1, ref2;
     DeleteBoxByID(this.selectedBox.boxID);
     if (this.selectedBox.prevBoxes.length > 0) {
       for (i = j = 0, ref = this.selectedBox.prevBoxes.length; 0 <= ref ? j < ref : j > ref; i = 0 <= ref ? ++j : --j) {
@@ -125,6 +125,22 @@
           }
         } else {
           this.selectedBox.prevBoxes[i].noBox = null;
+        }
+      }
+    }
+    if (this.selectedBox.yesBox) {
+      for (i = k = 0, ref1 = this.selectedBox.yesBox.prevBoxes.length; 0 <= ref1 ? k < ref1 : k > ref1; i = 0 <= ref1 ? ++k : --k) {
+        prevBox = this.selectedBox.yesBox.prevBoxes[i];
+        if (prevBox.boxID === this.selectedBox.boxID) {
+          this.selectedBox.yesBox.prevBoxes.splice(i, 1);
+        }
+      }
+    }
+    if (this.selectedBox.noBox) {
+      for (i = l = 0, ref2 = this.selectedBox.noBox.prevBoxes.lenght; 0 <= ref2 ? l < ref2 : l > ref2; i = 0 <= ref2 ? ++l : --l) {
+        prevBox = this.selectedBox.noBox.prevBoxes[i];
+        if (prevBox.boxID === this.selectedBox.boxID) {
+          this.selectedBox.noBox.prevBoxes.splice(i, 1);
         }
       }
     }
