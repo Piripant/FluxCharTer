@@ -9,7 +9,6 @@
   inputType = '';
 
   this.interpreteInterface = function(code, vars) {
-    console.log(vars);
     vars_dict = vars;
     return eval(code);
   };

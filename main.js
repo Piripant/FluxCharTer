@@ -8,8 +8,10 @@
     this.IntWorker = new Worker("interpreter.js");
     this.IntWorker.postMessage(['init']);
     this.IntWorker.onmessage = workerMessage;
+    InitForms();
     InitCanvas();
-    return InitHTML();
+    InitHTML();
+    return DrawAllBoxes();
   };
 
   workerMessage = function(event) {

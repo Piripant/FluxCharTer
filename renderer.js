@@ -106,6 +106,10 @@
         return DrawEval(box.position.x, box.position.y, single);
       case interName:
         return DrawInter(box.position.x, box.position.y, single);
+      case 'start':
+        return DrawCmd(box.position.x, box.position.y, single);
+      case 'end':
+        return DrawCmd(box.position.x, box.position.y, single);
     }
   };
 
