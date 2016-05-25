@@ -73,7 +73,7 @@
           } else {
             lastNextBox = null;
           }
-        } else {
+        } else if (startBox.type === evalName) {
           if (eval(startBox.compText)) {
             if (startBox.yesBox) {
               return InterpreteBox(startBox.yesBox);
@@ -82,6 +82,10 @@
             if (startBox.noBox) {
               return InterpreteBox(startBox.noBox);
             }
+          }
+        } else {
+          if (startBox.yesBox) {
+            return InterpreteBox(startBox.yesBox);
           }
         }
       } catch (error) {

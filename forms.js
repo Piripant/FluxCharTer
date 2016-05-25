@@ -61,19 +61,11 @@
 
     Box.compText = '';
 
-    Box.position = new Vector(0, 0);
-
-    Box.type = '';
-
     Box.boxID = 0;
 
     Box.entryPoints = [];
 
     Box.prevBoxes = [];
-
-    Box.yesBox = null;
-
-    Box.noBox = null;
 
     function Box(type) {
       this.type = type;
@@ -90,6 +82,7 @@
       this.prevBoxes = [];
       this.yesBox = null;
       this.noBox = null;
+      this.position = new Vector(0, 0);
     }
 
     Box.prototype.setText = function(text) {
@@ -103,11 +96,32 @@
 
   this.boxes = [];
 
+  this.InitForms = function() {
+    var endingBox, startingBox;
+    startingBox = new Box('start');
+    endingBox = new Box('end');
+    startingBox.boxID = 0;
+    startingBox.position.x = 520;
+    startingBox.position.y = 208;
+    startingBox.name = 'Start';
+    startingBox.text = 'Start';
+    startingBox.entryPoints = cmdEntries;
+    endingBox.boxID = 1;
+    endingBox.position.x = 520;
+    endingBox.position.y = 416;
+    endingBox.name = 'End';
+    endingBox.text = 'End';
+    endingBox.entryPoints = cmdEntries;
+    this.init_boxes = [startingBox, endingBox];
+    return this.boxes = init_boxes;
+  };
+
   this.GetBoxByCoords = function(x, y) {
     var box, j, len, ref;
     ref = this.boxes;
     for (j = 0, len = ref.length; j < len; j++) {
       box = ref[j];
+      console.log(box);
       if (box.position.x === x && box.position.y === y) {
         return box;
       }
