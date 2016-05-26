@@ -18,7 +18,7 @@
       title: text.toString(),
       animation: "none",
       allowEscapeKey: false
-    }, onSwalClick);
+    }).then(onSwalClick);
   };
 
   intprtPrompt = function(text) {
@@ -28,16 +28,16 @@
       allowEscapeKey: false,
       type: "input",
       inputPlaceholder: "Your input here"
-    }, onSwalInput);
+    }).then(onSwalClick);
   };
 
   onSwalInput = function(input_text) {
-    setTimeout(resumeMessage, 700);
+    setTimeout(resumeMessage, 500);
     return input_text;
   };
 
   onSwalClick = function() {
-    return setTimeout(resumeMessage, 700);
+    return setTimeout(resumeMessage, 500);
   };
 
   resumeMessage = function() {

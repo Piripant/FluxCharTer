@@ -63,10 +63,6 @@
 
     Box.boxID = 0;
 
-    Box.entryPoints = [];
-
-    Box.prevBoxes = [];
-
     function Box(type) {
       this.type = type;
       switch (type) {
@@ -78,6 +74,12 @@
           break;
         case interName:
           this.entryPoints = interEntries;
+          break;
+        case 'start':
+          this.entryPoints = cmdEntries;
+          break;
+        case 'end':
+          this.entryPoints = cmdEntries;
       }
       this.prevBoxes = [];
       this.yesBox = null;
@@ -105,13 +107,11 @@
     startingBox.position.y = 208;
     startingBox.name = 'Start';
     startingBox.text = 'Start';
-    startingBox.entryPoints = cmdEntries;
     endingBox.boxID = 1;
     endingBox.position.x = 520;
     endingBox.position.y = 416;
     endingBox.name = 'End';
     endingBox.text = 'End';
-    endingBox.entryPoints = cmdEntries;
     this.init_boxes = [startingBox, endingBox];
     return this.boxes = init_boxes;
   };
@@ -121,7 +121,6 @@
     ref = this.boxes;
     for (j = 0, len = ref.length; j < len; j++) {
       box = ref[j];
-      console.log(box);
       if (box.position.x === x && box.position.y === y) {
         return box;
       }

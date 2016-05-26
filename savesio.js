@@ -26,7 +26,8 @@
   };
 
   this.loadString = function(file_string) {
-    var box, error, ex, file, i, j, k, l, len, line, ref, ref1, results;
+    var box, error, ex, file, i, j, k, l, len, line, newBoxes, ref, ref1;
+    newBoxes = [];
     try {
       file = file_string.split("|");
       for (i = j = 0, ref = file.length; 0 <= ref ? j < ref : j > ref; i = 0 <= ref ? ++j : --j) {
@@ -39,23 +40,19 @@
         box.setText(line[1]);
         box.position = new Vector(parseInt(line[2]), parseInt(line[3]));
         box.boxID = parseInt(line[5]);
-        this.boxes.push(box);
+        newBoxes.push(box);
       }
-      results = [];
-      for (i = l = 0, ref1 = boxes.length; 0 <= ref1 ? l < ref1 : l > ref1; i = 0 <= ref1 ? ++l : --l) {
+      for (i = l = 0, ref1 = newBoxes.length; 0 <= ref1 ? l < ref1 : l > ref1; i = 0 <= ref1 ? ++l : --l) {
         if (file[i][6] !== "") {
-          boxes[i].yesBox = GetByID(parseInt(file[i][6]));
-          console.log(boxes[i].yesBox);
-          boxes[i].yesBox.prevBoxes.push(boxes[i]);
+          newBoxes[i].yesBox = GetByID(parseInt(file[i][6]));
+          newBoxes[i].yesBox.prevBoxes.push(boxes[i]);
         }
         if (file[i][7] !== "") {
-          boxes[i].noBox = GetByID(parseInt(file[i][7]));
-          results.push(boxes[i].noBox.prevBoxes.push(boxes[i]));
-        } else {
-          results.push(void 0);
+          newBoxes[i].noBox = GetByID(parseInt(file[i][7]));
+          newBoxes[i].noBox.prevBoxes.push(boxes[i]);
         }
       }
-      return results;
+      return this.boxes = newBoxes;
     } catch (error) {
       ex = error;
       swal("File corrupted!");
