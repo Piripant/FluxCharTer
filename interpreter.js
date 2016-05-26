@@ -41,7 +41,7 @@
   };
 
   ResumeInterpreter = function() {
-    if (lastNextBox) {
+    if (lastNextBox && running) {
       return InterpreteBox(lastNextBox);
     }
   };
