@@ -92,6 +92,22 @@
       return this.compText = compile(text, this.type);
     };
 
+    Box.prototype.copy = function() {
+      var copied;
+      copied = new Box(this.type);
+      copied.name = this.name;
+      copied.text = this.text;
+      copied.compText = this.compText;
+      copied.boxID = this.boxID;
+      copied.prevBoxes = this.prevBoxes;
+      copied.yesBox = this.yesBox;
+      copied.noBox = this.noBox;
+      copied.position = new Vector(0, 0);
+      copied.position.x = this.position.x;
+      copied.position.y = this.position.y;
+      return copied;
+    };
+
     return Box;
 
   })();
@@ -116,11 +132,26 @@
     return this.boxes = init_boxes;
   };
 
-  this.GetBoxByCoords = function(x, y) {
-    var box, j, len, ref;
-    ref = this.boxes;
-    for (j = 0, len = ref.length; j < len; j++) {
-      box = ref[j];
+  this.CopyBoxes = function(boxes) {
+    var box, cboxes, j, len;
+    if (boxes == null) {
+      boxes = this.boxes;
+    }
+    cboxes = [];
+    for (j = 0, len = boxes.length; j < len; j++) {
+      box = boxes[j];
+      cboxes.push(box.copy());
+    }
+    return cboxes;
+  };
+
+  this.GetBoxByCoords = function(x, y, boxes) {
+    var box, j, len;
+    if (boxes == null) {
+      boxes = this.boxes;
+    }
+    for (j = 0, len = boxes.length; j < len; j++) {
+      box = boxes[j];
       if (box.position.x === x && box.position.y === y) {
         return box;
       }
@@ -128,21 +159,27 @@
     return false;
   };
 
-  this.DeleteBoxByID = function(id) {
+  this.DeleteBoxByID = function(id, boxes) {
     var i, j, ref;
-    for (i = j = 0, ref = this.boxes.length; 0 <= ref ? j < ref : j > ref; i = 0 <= ref ? ++j : --j) {
-      if (this.boxes[i].boxID === id) {
-        this.boxes.splice(i, 1);
+    if (boxes == null) {
+      boxes = this.boxes;
+    }
+    for (i = j = 0, ref = boxes.length; 0 <= ref ? j < ref : j > ref; i = 0 <= ref ? ++j : --j) {
+      if (boxes[i].boxID === id) {
+        boxes.splice(i, 1);
         return;
       }
     }
   };
 
-  this.GetByID = function(id) {
+  this.GetByID = function(id, boxes) {
     var i, j, ref;
-    for (i = j = 0, ref = this.boxes.length; 0 <= ref ? j < ref : j > ref; i = 0 <= ref ? ++j : --j) {
-      if (this.boxes[i].boxID === id) {
-        return this.boxes[i];
+    if (boxes == null) {
+      boxes = this.boxes;
+    }
+    for (i = j = 0, ref = boxes.length; 0 <= ref ? j < ref : j > ref; i = 0 <= ref ? ++j : --j) {
+      if (boxes[i].boxID === id) {
+        return boxes[i];
       }
     }
   };

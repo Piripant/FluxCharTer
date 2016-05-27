@@ -288,7 +288,6 @@
   this.CanvasDrag = function(event) {
     var gx, gy, overingCell, x, y;
     if (selectedBox && isMouseDown) {
-      console.log("Moving");
       x = event.offsetX;
       y = event.offsetY;
       gx = Math.round(x / (boxSize[0] + gridDist)) * (boxSize[0] + gridDist);
@@ -306,7 +305,6 @@
   this.CanvasClick = function(event) {
     var clickedCell, gx, gy, newBox, x, y;
     isMouseDown = true;
-    console.log("Down!");
     x = event.offsetX;
     y = event.offsetY;
     gx = Math.round(x / (boxSize[0] + gridDist)) * (boxSize[0] + gridDist);
@@ -369,19 +367,18 @@
       return;
     }
     clickAction = selectName;
-    console.log(clickedCell);
     if (clickedCell) {
       RestoreCtx();
       this.selectedBox = clickedCell;
       HTML_SetAttributes(this.selectedBox);
       SetSelectionGUI(this.selectedBox);
-      DrawSelections();
+      return DrawSelections();
     } else {
       this.selectedBox = null;
       RestoreCtx();
       HideAllEl(HTML_els.propEl);
       HideAllEl(HTML_els.genPropEl);
-      DisableAll();
+      return DisableAll();
     }
   };
 
