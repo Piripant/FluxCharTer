@@ -44,12 +44,12 @@
       }
       for (i = l = 0, ref1 = newBoxes.length; 0 <= ref1 ? l < ref1 : l > ref1; i = 0 <= ref1 ? ++l : --l) {
         if (file[i][6] !== "") {
-          newBoxes[i].yesBox = GetByID(parseInt(file[i][6]));
-          newBoxes[i].yesBox.prevBoxes.push(boxes[i]);
+          newBoxes[i].yesBox = GetByID(parseInt(file[i][6]), newBoxes);
+          newBoxes[i].yesBox.prevBoxes.push(newBoxes[i]);
         }
         if (file[i][7] !== "") {
-          newBoxes[i].noBox = GetByID(parseInt(file[i][7]));
-          newBoxes[i].noBox.prevBoxes.push(boxes[i]);
+          newBoxes[i].noBox = GetByID(parseInt(file[i][7]), newBoxes);
+          newBoxes[i].noBox.prevBoxes.push(newBoxes[i]);
         }
       }
       return this.boxes = newBoxes;

@@ -20,10 +20,8 @@
     ref = Object.keys(functions_index);
     for (i = 0, len = ref.length; i < len; i++) {
       key = ref[i];
-      console.log(key);
       indexstr += key + " => " + functions_index[key] + "\n";
     }
-    console.log(indexstr);
     return swal("Here is a list of all functions", indexstr);
   };
 
