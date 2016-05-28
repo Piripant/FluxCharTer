@@ -27,6 +27,10 @@
 
   this.loadString = function(file_string) {
     var box, error, ex, file, i, j, k, l, len, line, newBoxes, ref, ref1;
+    swal({
+      title: "Loading",
+      showConfirmButton: false
+    });
     newBoxes = [];
     try {
       file = file_string.split("|");
@@ -40,6 +44,7 @@
         box.setText(line[1]);
         box.position = new Vector(parseInt(line[2]), parseInt(line[3]));
         box.boxID = parseInt(line[5]);
+        this.lastID = box.boxID + 1;
         newBoxes.push(box);
       }
       for (i = l = 0, ref1 = newBoxes.length; 0 <= ref1 ? l < ref1 : l > ref1; i = 0 <= ref1 ? ++l : --l) {
@@ -57,6 +62,8 @@
       ex = error;
       swal("File corrupted!");
       return console.log(ex);
+    } finally {
+      swal.close();
     }
   };
 
