@@ -39,8 +39,6 @@
   };
 
   onSwalInput = function(input_text) {
-    console.log("Here is input " + input_text);
-    console.log(eval_code);
     if (isNaN(input_text)) {
       input_text = input_text.replace(/["'-[\]{}()*+?.,\\^$|#\s]/g, "\\$&");
       eval_code = eval_code.replace(promptRegex, "\"" + input_text + "\"");
